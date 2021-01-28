@@ -42,27 +42,13 @@ class Db
         if (is_null($type)) {
             if (is_int($value)) {
                 $type = PDO::PARAM_INT;  
-            } else if (is_boot($value)) {
+            } else if (is_bool($value)) {
                 $type = PDO::PARAM_BOOL;
             } else if (is_null($value)) {
                 $type = PDO::PARAM_NULL;    
             } else {
                 $type = PDO::PARAM_STR;
             }
-
-            // switch (true) {
-            //     case is_int($value):
-            //         $type = PDO::PARAM_INT;
-            //         break;
-            //     case is_boot($value):
-            //         $type = PDO::PARAM_BOOL;
-            //         break;
-            //     case is_null($value):
-            //         $type = PDO::PARAM_NULL;
-            //         break;
-            //     default:
-            //         $type = PDO::PARAM_STR;
-            // }
         }
 
         $this->stmt->bindValue($param, $value, $type);
