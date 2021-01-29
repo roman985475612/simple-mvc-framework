@@ -9,7 +9,7 @@ class Pages extends Controller
 
     public function index()
     {
-        $posts = $this->postModel->getPosts();
+        $posts = $this->postModel->all();
         $this->view('pages/index', [
             'title' => 'Welcome',
             'description' => 'The jumbotron component is removed in favor of utility classes like .bg-light for the background color and .p-* classes to control padding.',

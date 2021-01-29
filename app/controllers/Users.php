@@ -114,7 +114,7 @@ class Users extends Controller
                     if ($loggedInUser) {
                         $this->createUserSession($user);
                         flash('success', '<strong>Success!</strong> Welcome, ' . $_SESSION['user_name'] . '!');
-                        return redirect('pages/index');
+                        return redirect('posts');
                     } else {
                         flash('danger', '<strong>Error!</strong> Password incorrect!');
                     }

@@ -11,9 +11,10 @@ class User
 
     public function register($data)
     {
-        $this->db->query("INSERT INTO users (name, email, password) VALUES(:name, :email, :password)");
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':email', $data['email']);
+        $sql = QueryBuilder::insert('users', ['name', 'email', 'password']);
+        $this->db->query($sql);
+        $this->db->bind(':name'    , $data['name']);
+        $this->db->bind(':email'   , $data['email']);
         $this->db->bind(':password', $data['password']);
 
         return $this->db->execute();
@@ -21,7 +22,12 @@ class User
 
     public function findByEmail($email)
     {
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $sql = QueryBuilder::select(['*'])
+                           ->from('users')
+                           ->where('email', ':email')
+                           ->getQuery();
+
+        $this->db->query($sql);
         $this->db->bind(':email', $email);
 
         return $this->db->single();

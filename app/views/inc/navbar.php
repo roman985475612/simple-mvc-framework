@@ -12,14 +12,18 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= URLROOT ?>/pages/about">About</a>
         </li>
+        <?php if (isAuthenticated()): ?>
+            <li class="nav-item"><a href="<?= URLROOT ?>/posts/add" class="nav-link"><i class="fas fa-plus-circle"></i> Add post</a></li>
+            <li class="nav-item"><a href="<?= URLROOT ?>/posts/index" class="nav-link"><i class="fas fa-list-alt"></i> Posts</a></li>
+        <?php endif ?>
       </ul>
-      <ul class="navbar-nav me-auto">
-        <?php if (empty($_SESSION['user_id'])): ?>
-            <li class="nav-item"><a href="<?= URLROOT ?>/users/login" class="nav-link">Login</a></li>
-            <li class="nav-item"><a href="<?= URLROOT ?>/users/register" class="nav-link">Register</a></li>
-        <?php else: ?>
+      <ul class="navbar-nav">
+        <?php if (isAuthenticated()): ?>
             <span class="navbar-text"><?= $_SESSION['user_name'] ?></span>
             <li class="nav-item"><a href="<?= URLROOT ?>/users/logout" class="nav-link">Logout</a></li>
+        <?php else: ?>
+            <li class="nav-item"><a href="<?= URLROOT ?>/users/login" class="nav-link">Login</a></li>
+            <li class="nav-item"><a href="<?= URLROOT ?>/users/register" class="nav-link">Register</a></li>
         <?php endif ?>
       </ul>
     </div>
